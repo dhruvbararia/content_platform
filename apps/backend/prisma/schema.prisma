@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String @id @default(cuid())
+  email     String @unique
+  password  String?
+  name      String
+  roleId    String
+  createdAt DateTime @default(now())
+  @@map("users")
+}
+
+model Role {
+  id   String @id @default(cuid())
+  name String @unique
+  @@map("roles")
+}
+
+model Setting {
+  id   String @id @default(cuid())
+  key  String @unique
+  value Json
+  @@map("settings")
+}
+
+model Document {
+  id        String @id @default(cuid())
+  title     String
+  filePath  String
+  createdAt DateTime @default(now())
+  @@map("documents")
+}
+
+model Letter {
+  id        String @id @default(cuid())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  @@map("letters")
+}
+
+model Course {
+  id        String @id @default(cuid())
+  title     String
+  createdAt DateTime @default(now())
+  @@map("courses")
+}
