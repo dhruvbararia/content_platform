@@ -31,11 +31,18 @@ model Setting {
 }
 
 model Document {
-  id        String @id @default(cuid())
-  title     String
-  filePath  String
-  createdAt DateTime @default(now())
-  @@map("documents")
+  id          Int      @id @default(autoincrement())
+  title       String
+  topic       String?
+  category    String?
+  type        String?  // pdf/doc/image
+  fileKey     String   // Storage path
+  fileUrl     String?  // Signed URL
+  metadata    Json?    // Extra fields
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   Int      // userId
+  user        User     @relation(fields: [createdBy], references: [id])
 }
 
 model Letter {

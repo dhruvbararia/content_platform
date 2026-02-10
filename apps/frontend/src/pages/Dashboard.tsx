@@ -1,5 +1,5 @@
-import { useMe } from "@/hooks/useAuth";
-import { Button } from "@/components/ui/Button";
+import { useMe } from "../hooks/useAuth";
+import { Button } from "../components/ui/Button";
 
 export default function Dashboard() {
   const { data: user, isLoading } = useMe();

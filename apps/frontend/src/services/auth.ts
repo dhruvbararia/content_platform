@@ -16,7 +16,8 @@ export const login = async (email: string, password: string) => {
 
 export const getMe = async () => {
   const token = localStorage.getItem('token');
-  const response = await fetch(`${API_URL}/auth/me`, {
+  console.log(token);
+  const response = await fetch(`${API_URL}/protected/me`, {
     headers: { Authorization: `Bearer ${token}` }
   });
 
@@ -26,3 +27,5 @@ export const getMe = async () => {
 
   return response.json();
 };
+
+

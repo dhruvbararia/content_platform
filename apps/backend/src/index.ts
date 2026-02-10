@@ -6,6 +6,8 @@ import { PrismaClient } from '@prisma/client';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import authRouter from './routes/auth.js';
+import protectedRoutesRouter from './routes/protected/protectedRoutes.js'
+import documentsRouter from './routes/protected/documents.js'
 import { authenticateToken } from './middleware/auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,12 +26,12 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/auth', authRouter);
 
 // Protected test route
-app.get('/api/protected', authenticateToken, (req, res) => {
-  res.json({ message: 'Protected route works!', user: req.user });
-});
+app.use('/api/protected', authenticateToken, protectedRoutesRouter);
+
+app.use('/api/documents', authenticateToken, documentsRouter);
 
 // Health
-app.get('/health', async () => {
+app.get('/health', async (req: express.Request, res: express.Response) => {
   await prisma.$queryRaw`SELECT 1`;
   res.json({ status: 'ok' });
 });

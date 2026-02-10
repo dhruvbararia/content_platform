@@ -36,9 +36,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.get('/me', async (req, res) => {
-  // Protected by authenticateToken middleware
-  res.json(req.user);
-});
+
 
 export default router;

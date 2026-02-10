@@ -1,25 +1,25 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "dom"],
+    "module": "es2020", // or "ESNext" if using ESM
+    "moduleResolution": "node", // Critical for Node/Prisma
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
     "strict": true,
+    "jsx": "react-jsx",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@lib/*": ["src/lib/*"],
+      "@prisma/client": ["./node_modules/.prisma/client"] // Or prisma path
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src/**/*", "prisma/**/*.ts", "vite-env.d.ts"],
+
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useLogin, useMe } from '@/hooks/useAuth';
+import { useLogin, useMe } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
+import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/Input';
 
 export default function Login() {
   const [email, setEmail] = useState('admin@platform.com');
